@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DMN+ for bAbI Tasks</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../static/style.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Arial" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Arial" rel="stylesheet" type="text/css">
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="../static/script.js"></script>
+</head>
+
+<body>
+<h2 class="text-center app-header">DMN+ Webapp</h2>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 qa-container">
+            <form class="qa-form">
+                
+                <div class="form-group">
+                    <h4>
+                        <label for="taskType">Task Type (input 2, 3, 6, or 17) </label>
+                        <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip"
+                           data-placement="bottom" title="Type the number of one of the following bAbi task types: 2, 3, 6, or 17; then click 'Load Task Type' button; loading usually takes about one minute. Defaults to task 2 if you don't input one of the four possible numbers (2, 3, 6, or 17)"></i>
+                    </h4>
+                    <input class="form-control" id="taskType" autofocus
+                           autocomplete="off" spellcheck="false">
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-info" id="get_taskType" type="submit">Load Task Type</button>
+                </div>
+                <div class="form-group">
+                    <h4><label for="story">Story</label>
+                        <i class="glyphicon glyphicon-info-sign" data-toggle="tooltip"
+                           data-placement="top" title="Once task of selected type is done loading, click 'Get New Story' to get another story_question pair from task or click 'Predict Answer' to view the network's answer_prediction, attentions, and confidence given the current story_question pair"></i>
+                    </h4>
+                    <textarea class="form-control" id="story" rows="10" disabled></textarea>
+                </div>
+                <div class="form-group">
+                    <h4>
+                        <label for="question">Question</label>
+                    </h4> 
+                    <textarea class="form-control" id="question" rows="1" disabled></textarea>
+                </div>
+                <div class="form-group">
+                    <h4><label for="answer">Answer</label></h4>
+                    <textarea class="form-control" id="answer" rows="5" disabled></textarea>
+                </div>
+
+                <br>
+                <div class="text-center">
+                    <button class="btn btn-success" id="get_answer" type="submit">Predict answer</button>
+                    <button class="btn btn-warning" id="get_story" type="submit">Get new story</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 qa-explain-container">
+            <div class="form-group">
+                <table class="table table-hover" id="explanation">
+                    <thead>
+                        <tr>
+                            <th>Text</th>
+                            <th>Mem 1</th>
+                            <th>Mem 2</th>
+                            <th>Mem 3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

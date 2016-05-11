@@ -1,0 +1,6 @@
+1 John moved to the hallway.
+2 Mary journeyed to the bathroom.
+3 Where is John? 	hallway
+1 John went to the office.
+2 Mary journeyed to the kitchen.
+3 Where is Mary? 	kitchen

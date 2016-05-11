@@ -1,0 +1,8 @@
+numpy
+scipy
+Flask
+theano
+keras
+lasagne
+ntlk
+//nltk.download('punkt')
