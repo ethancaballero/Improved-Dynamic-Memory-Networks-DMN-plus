@@ -61,14 +61,14 @@ To run your own webapp locally:
 then go to http://0.0.0.0:5000/ in browser 
 
 ## Additions implemented in this DMN+ repo
-*positional sentence encoder produced by: fi = sum(lj * wij) in M through j=1
+* positional sentence encoder produced by: fi = sum(lj * wij) in M through j=1
 where lj is a column vector with structure ljd = (1 - j/M) - (d/D)(1 - 2j/M)
-*Bidirectional GRU for input fusion layer of input module
-*gt from Episodic Memory Module is a function similar to softmax
-*Attention based GRU in which update gate u of GRU is replaced with gt to yield this hidden layer: hi=git  h?i +(1 git) hi 1
-*untied answer module weights (this addition was not implemented before training time so it is not used by the webapp)
+* Bidirectional GRU for input fusion layer of input module
+* gt from Episodic Memory Module is a function similar to softmax
+* Attention based GRU in which update gate u of GRU is replaced with gt to yield this hidden layer: hi=git  h?i +(1 git) hi 1
+* untied answer module weights (this addition was not implemented before training time so it is not used by the webapp)
 
-*most of the additions are in lines ~250-440 of dmn_*.py
+* most of the additions are in lines ~250-440 of dmn_*.py
 
 ## Questions
 * Unsure how/where input dropout is supposed to be implemented
