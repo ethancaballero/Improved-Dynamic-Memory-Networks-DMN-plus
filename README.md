@@ -50,9 +50,9 @@ There are pretrained states for bAbI tasks 2, 3, 6, & 17 in the states folder.
 definitely make sure floatX is set equal to float32 in `.theanorc` file
 
 ## Webapp Usage
-The webapp uses this implementation to answer questions about stories from bAbi qa task 2, 3, 6, or 17; these tasks were chosen because they are the tasks that receive the largest performance increase from DMN+ (and conversely are the tasks that initial DMN struggled with the most). The webapp does not offer server side training because I couldn't find a free hosting service that has sufficient compute to train in a reasonable amount of time.
+The webapp uses this implementation to answer questions about stories from bAbI qa task 2, 3, 6, or 17; these tasks were chosen because they are the tasks that receive the largest performance increase from DMN+ (and conversely are the tasks that initial DMN struggled with the most). The webapp does not offer server side training because I couldn't find a free hosting service that has sufficient compute to train in a reasonable amount of time.
 
-The question answering webapp using this implementation is currently running at [ethancaballero.pythonanywhere.com](http://ethancaballero.pythonanywhere.com/). Upon arriving at the webapp page, type the number 2, 3, 6, or 17 into Task Type box and then click 'Load Task Type' button to load bAbi task of that type (loading the task usually takes about one minute). When loading finishes, the Story and Question text boxes will respectively be filled with a story and a question. Next, click 'Predict Answer' to view the network's answer_prediction, attentions, and confidence given the current story_question pair or click 'Load New Story' to get new story_question pair.  To load bAbi tasks of a different type, type the number 2, 3, 6, or 17 into Task Type box and then click 'Load Task Type' button to load bAbi task of that type.
+The question answering webapp using this implementation is currently running at [ethancaballero.pythonanywhere.com](http://ethancaballero.pythonanywhere.com/). Upon arriving at the webapp page, type the number 2, 3, 6, or 17 into Task Type box and then click 'Load Task Type' button to load bAbI task of that type (loading the task usually takes about one minute). When loading finishes, the Story and Question text boxes will respectively be filled with a story and a question. Next, click 'Predict Answer' to view the network's answer_prediction, attentions, and confidence given the current story_question pair or click 'Load New Story' to get new story_question pair.  To load bAbI tasks of a different type, type the number 2, 3, 6, or 17 into Task Type box and then click 'Load Task Type' button to load bAbI task of that type.
 
 To run your own webapp locally:
 
@@ -77,7 +77,7 @@ where lj is a column vector with structure ljd = (1 - j/M) - (d/D)(1 - 2j/M)
 ## Benchmarks
 * DMN+ implementation accuracy on test data is higher than that of 2015 DMN, but lower than accuracies reported in DMN+ paper. I'm pretty sure this insufficient generalization is due to an error in my implementation of dropout on the initial sentence encodings.
 
-| task (10k) | Test error rates (%) |
+| English bAbI task (10k) | Test error rates (%) |
 | --- | --- |
 | 2: 2 supporting facts | 9.5 |
 | 3: 3 supporting facts | 29.6 |
