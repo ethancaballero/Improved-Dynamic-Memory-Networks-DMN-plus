@@ -60,7 +60,7 @@ To run your own webapp locally:
 
 then go to http://0.0.0.0:5000/ in browser 
 
-##Additions implemented in this DMN+ repo:
+## Additions implemented in this DMN+ repo
 *positional sentence encoder produced by: fi = sum(lj * wij) in M through j=1
 where lj is a column vector with structure ljd = (1 - j/M) - (d/D)(1 - 2j/M)
 *Bidirectional GRU for input fusion layer of input module
