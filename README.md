@@ -92,7 +92,7 @@ training settings were: adam with lr=.0002 and beta=.5; dropout p=.1; l2 reg = .
 
 ## Acknowledgements
 * This is a fork of [YerevaNN's implementation of the initial version of Dynamic Memory Networks](https://github.com/YerevaNN/Dynamic-memory-networks-in-Theano).
-* Webapp portion is based off [Vinh Khuc's MemN2N Webapp implementation](https://github.com/vinhkhuc/MemN2N-babi-python)
+* Webapp design is based off [Vinh Khuc's MemN2N Webapp implementation](https://github.com/vinhkhuc/MemN2N-babi-python)
 
 ## License?
 JSON
