@@ -80,7 +80,7 @@ where lj is a column vector with structure ljd = (1 - j/M) - (d/D)(1 - 2j/M)
 | English bAbI task (10k) | Test error rate (%) |
 | --- | --- |
 | 2: 2 supporting facts | 9.5 |
-| 3: 3 supporting facts | 29.6 |
+| 3: 3 supporting facts | 28.9 |
 | 6: yes/no questions | 0.3 |
 | 17: positional reasoning | 20.2 |
 
