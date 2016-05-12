@@ -1,4 +1,4 @@
-# Implementation of DMN+ (Improved Dynamic Memory Networks by MetaMind) in Theano
+# Implementation of DMN+ (Improved Dynamic Memory Networks) in Theano
 This is an implementation of DMN+ (Improved Dynamic Memory Networks) from the paper by Xiong et al. at MetaMind, Dynamic Memory Networks for Visual and Textual Question Answering, [arXiv:1603.01417](http://arxiv.org/abs/1603.01417).
 
 It's a fork of YerevaNN's implementation of the initial version of Dynamic Memory Networks.
