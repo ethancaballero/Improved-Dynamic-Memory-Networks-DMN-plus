@@ -76,6 +76,7 @@ where lj is a column vector with structure ljd = (1 - j/M) - (d/D)(1 - 2j/M)
 
 ## Benchmarks
 * DMN+ implementation accuracy on test data is higher than that of 2015 DMN, but lower than accuracies reported in DMN+ paper. I'm pretty sure this insufficient generalization is due to an error in my implementation of dropout on the initial sentence encodings.
+* This benchmark tests the model when it has been trained in a weakly supervised setting (relevant supporting facts are **not** marked during training)
 
 | English bAbI task (10k) | Test error rate (%) |
 | --- | --- |
