@@ -83,9 +83,11 @@ def get_babi_raw(id, test_id):
     babi_name = babi_map[id]
     babi_test_name = babi_map[test_id]
     
-    babi_train_raw = init_babi(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data/tasks_1-20_v1-2/en/%s_train.txt' % babi_name))
-    babi_test_raw = init_babi(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data/tasks_1-20_v1-2/en/%s_test.txt' % babi_test_name))
-
+    #babi_train_raw = init_babi(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data/tasks_1-20_v1-2/en/%s_train.txt' % babi_name))
+    #babi_test_raw = init_babi(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data/tasks_1-20_v1-2/en/%s_test.txt' % babi_test_name))
+    
+    babi_train_raw = init_babi(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data/tasks_1-20_v1-2/en-10k/%s_train.txt' % babi_name))
+    babi_test_raw = init_babi(os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data/tasks_1-20_v1-2/en-10k/%s_test.txt' % babi_test_name))
 
     return babi_train_raw, babi_test_raw
 
