@@ -100,15 +100,11 @@ class DMN_tied:
         self.W_inp_hid_hid_bwd = nn_utils.normal_param(std=0.1, shape=(self.dim, self.dim))
         self.b_inp_hid_bwd = nn_utils.constant_param(value=0.0, shape=(self.dim,))
 
-        #self.V_f = nn_utils.normal_param(std=0.1, shape=(self.dim, self.dim))
-        #self.V_b = nn_utils.normal_param(std=0.1, shape=(self.dim, self.dim))
-
         self.inp_sent_reps, _ = theano.scan(
                                 fn=self.sum_pos_encodings_in,
                                 sequences=self.input_var)
 
         self.inp_sent_reps_stacked = T.stacklists(self.inp_sent_reps)
-        #self.inp_c = self.input_module_full(self.inp_sent_reps_stacked)
 
         self.inp_c = self.input_module_full(self.inp_sent_reps)
 
@@ -127,8 +123,6 @@ class DMN_tied:
         self.W_mem_hid_hid = nn_utils.normal_param(std=0.1, shape=(self.dim, self.dim))
         self.b_mem_hid = nn_utils.constant_param(value=0.0, shape=(self.dim,))
         
-        #self.W_b = nn_utils.normal_param(std=0.1, shape=(self.dim, self.dim))
-        #self.W_1 = nn_utils.normal_param(std=0.1, shape=(self.dim, 7 * self.dim + 0))
         self.W_1 = nn_utils.normal_param(std=0.1, shape=(self.dim, 4 * self.dim + 0))
         self.W_2 = nn_utils.normal_param(std=0.1, shape=(1, self.dim))
         self.b_1 = nn_utils.constant_param(value=0.0, shape=(self.dim,))
@@ -221,11 +215,7 @@ class DMN_tied:
         
         self.loss = self.loss_ce + self.loss_l2
         
-        #updates = lasagne.updates.adadelta(self.loss, self.params)
-        updates = lasagne.updates.adam(self.loss, self.params)
         updates = lasagne.updates.adam(self.loss, self.params, learning_rate=0.0001, beta1=0.5) #from DCGAN paper
-        #updates = lasagne.updates.adadelta(self.loss, self.params, learning_rate=0.0005)
-        #updates = lasagne.updates.momentum(self.loss, self.params, learning_rate=0.0003)
         
         self.attentions = T.stack(self.attentions)
         if self.mode == 'train':
@@ -260,18 +250,15 @@ class DMN_tied:
         pe_matrix = self.pe_matrix_in
         pe_weights = pe_matrix * self.W_pe[statement]
 
-        #'''
         if self.dropout_in > 0 and self.mode == 'train':
             pe_weights_d = pe_weights.dimshuffle(('x', 0, 1))
             net = layers.InputLayer(shape=(1, self.max_inp_sent_len, self.dim), input_var=pe_weights_d)
             net = layers.DropoutLayer(net, p=self.dropout_in)
             pe_weights = layers.get_output(net)[0]
-        #'''
 
         pe_weights = T.cast(pe_weights, floatX)
         memories = T.sum(pe_weights, axis=0)
         return memories
-        #return memories[-1]
 
     def sum_pos_encodings_q(self, statement):
         pe_matrix = self.pe_matrix_q
@@ -289,28 +276,12 @@ class DMN_tied:
         fwd_gru = self.GRU_update(prev_h, x_fwd, self.W_inp_res_in_fwd, self.W_inp_res_hid_fwd, self.b_inp_res_fwd, 
                                  self.W_inp_upd_in_fwd, self.W_inp_upd_hid_fwd, self.b_inp_upd_fwd,
                                  self.W_inp_hid_in_fwd, self.W_inp_hid_hid_fwd, self.b_inp_hid_fwd)
-        '''
-        if self.dropout_in > 0 and self.mode == 'train':
-            fwd_gru_swap = fwd_gru.dimshuffle(('x', 0))
-            net = layers.InputLayer(shape=(1, self.dim), input_var=fwd_gru_swap)
-            net = layers.DropoutLayer(net, p=self.dropout_in)
-            fwd_gru_d = layers.get_output(net)[0]
-            fwd_gru = fwd_gru_d
-        #'''
         return fwd_gru
 
     def bi_GRU_bwd(self, x_bwd, prev_h):
         bwd_gru = self.GRU_update(prev_h, x_bwd, self.W_inp_res_in_bwd, self.W_inp_res_hid_bwd, self.b_inp_res_bwd, 
                                  self.W_inp_upd_in_bwd, self.W_inp_upd_hid_bwd, self.b_inp_upd_bwd,
                                  self.W_inp_hid_in_bwd, self.W_inp_hid_hid_bwd, self.b_inp_hid_bwd)
-        '''
-        if self.dropout_in > 0 and self.mode == 'train':
-            bwd_gru_swap = bwd_gru.dimshuffle(('x', 0))
-            net = layers.InputLayer(shape=(1, self.dim), input_var=bwd_gru_swap)
-            net = layers.DropoutLayer(net, p=self.dropout_in)
-            bwd_gru_d = layers.get_output(net)[0]
-            bwd_gru = bwd_gru_d
-        #'''
         return bwd_gru
 
     def input_module_full(self, x):
@@ -322,16 +293,12 @@ class DMN_tied:
         x_bwd = x[::-1]
 
         h_fwd_gru, _ = theano.scan(fn=self.bi_GRU_fwd, 
-                    #sequences=self.inp_sent_reps,
                     sequences=x_fwd,
                     outputs_info=T.zeros_like(self.b_inp_hid_fwd))
-                    #outputs_info=T.zeros_like(self.W_inp_hid_hid))
 
         h_bwd_gru, _ = theano.scan(fn=self.bi_GRU_bwd, 
-                    #sequences=self.inp_sent_reps,
                     sequences=x_bwd,
                     outputs_info=T.zeros_like(self.b_inp_hid_bwd))
-                    #outputs_info=T.zeros_like(self.W_inp_hid_hid))
 
         h_bwd_gru = h_bwd_gru[::-1]
 
@@ -544,15 +511,6 @@ class DMN_tied:
                                         ivocab = self.ivocab, 
                                         word_vector_size = self.word_vector_size, 
                                         to_return = "index") for w in range(len(q))]
-                                        
-            '''
-            q_vector = [utils.process_word(word = w, 
-                                        word2vec = self.word2vec, 
-                                        vocab = self.vocab, 
-                                        ivocab = self.ivocab, 
-                                        word_vector_size = self.word_vector_size, 
-                                        to_return = "word2vec") for w in q]
-                                        '''
 
             while(len(q_vector) < max_q_len):
                 q_vector.append(0)
